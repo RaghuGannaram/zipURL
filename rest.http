@@ -1,0 +1,13 @@
+###------------------------------------Get Short url-------------------------------
+GET http://localhost:5000/
+
+###------------------------------------Create Short url-------------------------------
+POST http://localhost:5000/api/v1/generate-hash 
+Content-Type: application/json
+
+{
+  "url": "https://nodejs.org/api/errors.html#r_crypto_hsh_finalized"
+}
+
+###------------------------------------Get Short url-------------------------------
+GET http://localhost:5000/6HgvdjZ6aAwm2Oko06uWEQ

@@ -1,0 +1,172 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(45deg, #2b5876, #4e4376);
+  margin: auto;
+  text-align: center;
+  color: #02f8e4;
+}
+
+#heading {
+  margin: 50px;
+}
+
+#card {
+  background-color: #21a896;
+  min-width: 250px;
+  width: 30%;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0px #08362f;
+  padding: 40px 20px 50px 20px;
+}
+
+#form {
+  width: 90%;
+  margin: auto;
+}
+
+#form>* {
+  width: 100%;
+}
+
+#form label {
+  color: #2b5876;
+  font-weight: bold;
+}
+
+#form input {
+  margin: 5px 0px 20px 0px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  outline: none;
+  color: #02f8e4;
+  border-radius: 4px;
+  background-color: #2b5876;
+  border: none;
+  height: 35px;
+}
+
+::placeholder {
+  color: #02f8e4;
+  opacity: 1;
+}
+
+#form button {
+  height: 35px;
+  box-sizing: border-box;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2b5876;
+  color: #02f8e4;
+  box-shadow: 2px 2px 5px 0px #08362f;
+
+}
+
+#form button:hover {
+  transform: scale(1.01);
+}
+
+#result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+#copyBtn {
+  margin-top: 20px;
+  display: none;
+  width: 100%;
+  padding: 5px;
+  height: 35px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2b5876;
+  color: #02f8e4;
+  box-shadow: 2px 2px 5px 0px #08362f;
+}
+
+#copyBtn:hover {
+  transform: scale(1.01);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #2b5876;
+  color: #02f8e4;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2b5876 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#generatedLink {
+  margin-top: 50px;
+  width: 100%;
+}
+
+#generatedLink>* {
+  margin: 10px auto;
+}
+
+#generatedLink h2 {
+  color: #2b5876;
+}
+
+a {
+  display: block;
+  background-color: #2b5876;
+  color: #02f8e4;
+  padding: 10px;
+  min-height: 35px;
+  box-sizing: border-box;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+a:hover {
+  background-color: #4e4376;
+  cursor: pointer;
+}
+
+a:active {
+  background-color: #4e4376;
+}
+
+a:visited {
+  background-color: #4e4376;
+}

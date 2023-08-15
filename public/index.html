@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
+  <title>zipURL</title>
+</head>
+
+<body>
+  <h2 id="heading">zipURL : A quick way to generate url shortcuts</h2>
+  <div id="card">
+    <form id="form" onsubmit="createShortURL(event); this.reset();">
+      <label for="url">Provide your URL</label><br>
+      <input type="text" id="url" name="url" value="" placeholder="Enter your url here...!"><br>
+      <button type="submit">Generate short URL</button>
+    </form>
+    <div id="result">
+      <div id="generatedLink">
+        <!-- <h2>Generated short URL</h2>
+          <a href=${shortURL} target="_blank">https://expressjs.com/en/4x/api.html#express.urlencoded</a> -->
+      </div>
+      <button id="copyBtn" class="tooltip" onclick="copyToClipBoard()">Copy<span class="tooltiptext">copy to clipboard</span></button>
+    </div>
+  </div>
+  <script>
+    async function createShortURL(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.currentTarget);
+      const plainFormData = Object.fromEntries(formData.entries());
+      const jsonFormData = JSON.stringify(plainFormData);
+
+      try {
+        const response = await fetch("/api/v1/generate-hash", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: jsonFormData,
+        });
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
+        }
+
+        const { hash } = await response.json();
+        const shortURL = `${window.location.origin}/${hash}`;
+        document.querySelector("#generatedLink").innerHTML = `
+          <h2>Generated short URL</h2>
+          <a href= ${shortURL} target="_blank">${shortURL} </a>
+        `
+        document.querySelector("#copyBtn").style.display = "block"
+        return;
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    }
+
+    function copyToClipBoard() {
+      const copiedText = document.querySelector("#generatedLink a").innerText;
+      navigator.clipboard.writeText(copiedText)
+    }
+  </script>
+</body>
+
+</html>
