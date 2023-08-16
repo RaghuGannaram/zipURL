@@ -6,7 +6,7 @@ USE hashdb;
 
 CREATE TABLE HashTable (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  hashValue VARCHAR(255) NOT NULL,
+  hashValue CHAR(7) NOT NULL,
   originalURL VARCHAR(255) NOT NULL
 );
 
