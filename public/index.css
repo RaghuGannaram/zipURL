@@ -75,6 +75,13 @@ body {
   transform: scale(1.02);
 }
 
+.warning {
+  color: #000;
+  margin: auto;
+  margin-top: 20px;
+  visibility: hidden;
+}
+
 .result {
   width: 300px;
   margin: 20px auto;
@@ -89,6 +96,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .result .clone-icon {
   cursor: pointer;
 }
@@ -97,6 +105,6 @@ body {
   transform: scale(1.2);
 }
 
-.not-found{
+.not-found {
   margin-top: 100px;
 }

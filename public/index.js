@@ -5,6 +5,11 @@ async function createShortURL(event) {
 	const plainFormData = Object.fromEntries(formData.entries());
 	const jsonFormData = JSON.stringify(plainFormData);
 
+	if (plainFormData.url.length === 0) {
+		document.querySelector(".warning").style.visibility = "visible";
+		return;
+	}
+
 	try {
 		const response = await fetch("/api/v1/generate-hash", {
 			method: "POST",
@@ -35,4 +40,10 @@ async function createShortURL(event) {
 function copyToClipBoard() {
 	const copiedText = document.querySelector(".result a").innerText;
 	navigator.clipboard.writeText(copiedText);
+}
+
+function inputHandler(event) {
+	if (event.target.value.length > 0) {
+		document.querySelector(".warning").style.visibility = "hidden";
+	}
 }

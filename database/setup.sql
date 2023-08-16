@@ -5,9 +5,10 @@ SELECT database();
 USE hashdb;
 
 CREATE TABLE HashTable (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  hashValue CHAR(7) NOT NULL,
-  originalURL VARCHAR(255) NOT NULL
+  hash VARCHAR(255) PRIMARY KEY,
+  url VARCHAR(255) NOT NULL
 );
 
 SHOW tables;
+
+SELECT * FROM HashTable;

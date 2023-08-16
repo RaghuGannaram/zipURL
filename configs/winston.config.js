@@ -1,6 +1,7 @@
+const util = require("util");
 const winston = require("winston");
-const getEnvironment = require("../utils/getEnvironment");
 const chalk = require("chalk");
+const getEnvironment = require("../utils/getEnvironment");
 
 const { addColors, createLogger, format, transports } = winston;
 
@@ -39,7 +40,14 @@ const logger = createLogger({
 if (getEnvironment() !== "production") {
 	logger.add(
 		new transports.Console({
-			format: format.combine(format.colorize(), format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }), format.errors({ stack: true }), customLogFormat),
+			format: format.combine(
+				format.colorize(),
+				format.splat(),
+				format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+				format.errors({ stack: true }),
+				customLogFormat
+			),
+			level: "debug"
 		})
 	);
 }

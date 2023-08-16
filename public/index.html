@@ -16,9 +16,12 @@
   <div class="card">
     <form class="form" onsubmit="createShortURL(event); this.reset();">
       <label for="url">Provide your URL</label><br>
-      <input type="text" id="url" name="url" value="" placeholder="Enter your url here...!"><br>
+      <input type="text" id="url" name="url" value="" placeholder="Enter your url here...!" oninput="inputHandler(event)"><br>
       <button type="submit">Generate short URL</button>
     </form>
+    <div class="warning-placeholder">
+      <p class="warning">Please enter the url..!</p>
+    </div>
   </div>
   <div class="result">
     <!-- <a href=${shortURL} target="_blank">https://expressjs.com/en/4x/</a>
