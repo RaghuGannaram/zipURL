@@ -3,14 +3,16 @@ const http = require("http");
 const chalk = require("chalk");
 const app = require("../server");
 const logger = require("../configs/winston.config");
+const { getCurrentPort } = require("../utils/env-info");
 
 const server = http.createServer(app);
-const port = process.env.PORT || "5000";
+const port = getCurrentPort();
 
 server.listen(port);
 
 server.on("error", () => {
 	console.log("Error on node.js ...!", error);
+
 	if (error.syscall !== "listen") throw error;
 
 	switch (error.code) {
@@ -29,6 +31,7 @@ server.on("error", () => {
 
 server.on("listening", () => {
 	const { address, family, port } = server.address();
+	
 	logger.info("server is up and running...🚀");
 	logger.info("server address: " + chalk.magenta(address));
 	logger.info("server port: " + chalk.magenta(port));

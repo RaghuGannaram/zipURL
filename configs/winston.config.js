@@ -1,7 +1,7 @@
-const util = require("util");
 const winston = require("winston");
 const chalk = require("chalk");
-const getEnvironment = require("../utils/getEnvironment");
+const util = require("util");
+const { getCurrentLogLevel } = require("../utils/env-info");
 
 const { addColors, createLogger, format, transports } = winston;
 
@@ -17,7 +17,9 @@ const colors = {
 
 addColors(colors);
 
-const customLogFormat = format.printf(({ level, message, timestamp, stack }) => {
+const level = getCurrentLogLevel();
+
+const consoleLogFormat = format.printf(({ level, message, timestamp, stack }) => {
 	const colorizedTimestamp = chalk.grey(timestamp);
 	const formattedMessage = typeof message === "object" ? util.inspect(message) : message;
 	const colorizedStack = stack ? chalk.red(stack) : "";
@@ -31,25 +33,47 @@ const customLogFormat = format.printf(({ level, message, timestamp, stack }) => 
 	return logMessage;
 });
 
-const logger = createLogger({
-	level: "debug",
-	format: format.json(),
-	transports: [new transports.File({ filename: "logs/error.log", level: "error" }), new transports.File({ filename: "logs/request.log", level: "http" })],
+const fileLogFormat = format.printf(({ level, message, timestamp }) => {
+	const unColoredMessage = message.replace(/\x1B\[\d+m/g, '');
+	const formattedMessage = typeof unColoredMessage === "object" ? util.inspect(unColoredMessage) : unColoredMessage;
+
+	return `${timestamp} ${level}: ${formattedMessage}`;
 });
 
-if (getEnvironment() !== "production") {
-	logger.add(
+const options = {
+	level: level,
+	transports: [
 		new transports.Console({
 			format: format.combine(
 				format.colorize(),
 				format.splat(),
-				format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+				format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }),
 				format.errors({ stack: true }),
-				customLogFormat
+				consoleLogFormat
 			),
 			level: "debug"
-		})
-	);
+		}),
+		new transports.File({
+			filename: "logs/error.log",
+			format: format.combine(
+				format.splat(),
+				format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }),
+				format.errors({ stack: true }),
+				fileLogFormat
+			),
+			level: "error"
+		}),
+		new transports.File({
+			filename: "logs/all.log",
+			format: format.combine(
+				format.splat(),
+				format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }),
+				format.errors({ stack: true }),
+				fileLogFormat
+			),
+		})],
 }
+
+const logger = createLogger(options);
 
 module.exports = logger;

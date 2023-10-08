@@ -1,5 +1,5 @@
 ###------------------------------------Get Short url-------------------------------
-GET http://localhost:5000/
+GET http://localhost:5000/6HgvdjZ6aAwm2Oko06uWEQ
 
 ###------------------------------------Create Short url-------------------------------
 POST http://localhost:5000/api/v1/generate-hash 

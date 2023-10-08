@@ -2,12 +2,9 @@ const fs = require("fs");
 const mysql = require("mysql");
 const chalk = require("chalk");
 const logger = require("./winston.config");
+const { getCurrentDBHost } = require("../utils/env-info");
 
-const db_hostname = process.env.MySQL_DB_HOSTNAME;
-const db_port = process.env.MySQL_DB_PORT;
-const db_username = process.env.MySQL_DB_USERNAME;
-const db_password = process.env.MySQL_DB_PASSWORD;
-const db_dbname = process.env.MySQL_DB_DATABASE;
+const { db_hostname, db_port, db_username, db_password, db_dbname } = getCurrentDBHost();
 
 const db = new mysql.createPool({
 	host: db_hostname,

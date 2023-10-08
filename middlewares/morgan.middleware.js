@@ -1,5 +1,5 @@
 const morgan = require("morgan");
-const getEnvironment = require("../utils/getEnvironment");
+const { getCurrentEnv } = require("../utils/env-info");
 const logger = require("../configs/winston.config");
 
 const stream = {
@@ -7,7 +7,10 @@ const stream = {
 };
 
 const skip = () => {
-	return getEnvironment() !== "development";
+	return false;
+
+	const currentEnv = getCurrentEnv();
+	return currentEnv !== "development";
 };
 
 const morganMiddleware = morgan(" :remote-addr :method :url :status :res[content-length] - :response-time ms", { stream, skip });
