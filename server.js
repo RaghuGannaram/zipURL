@@ -25,7 +25,7 @@ app.use(connectToDataBase);
 app.get("/health-check", (req, res) => {
 	res.status(200).json({ message: "OK" });
 });
-app.get("/app", express.static("./public"));
+app.use("/app", express.static("./public"));
 
 app.use("/", hashRouter);
 app.use((req, res) => {
