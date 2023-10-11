@@ -1,3 +1,6 @@
+###-----------------------------------health-check---------------------------------
+GET http://localhost:5000/health-check
+
 ###------------------------------------Get Short url-------------------------------
 GET http://localhost:5000/6HgvdjZ6aAwm2Oko06uWEQ
 
