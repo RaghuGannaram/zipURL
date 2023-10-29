@@ -3,7 +3,7 @@ const hashModel = require("../model/hash.model");
 const catchAsyncError = require("../middlewares/catch-async-error.middleware");
 const generateHash = require("../utils/generate-hash");
 const validateHash = require("../utils/validate-hash");
-const logger = require("../configs/winston.config");
+const logger = require("../configs/logger.config");
 
 const fetchURL = catchAsyncError(async (req, res, next) => {
 	const { hash } = req.params;

@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const logger = require("../configs/winston.config");
+const logger = require("../configs/logger.config");
 
 const getURLByHash = (db, hash) => {
 	return new Promise((resolve, reject) => {

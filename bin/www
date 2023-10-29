@@ -1,39 +1,85 @@
-#!/usr/bin/env node
 const http = require("http");
 const chalk = require("chalk");
-const app = require("../server");
-const logger = require("../configs/winston.config");
-const { getCurrentPort } = require("../utils/env-info");
+const app = require("../src/app");
+const logger = require("../src/configs/logger.config");
+const { getCurrentPort } = require("../src/utils/env-info");
 
 const server = http.createServer(app);
 const port = getCurrentPort();
 
 server.listen(port);
 
-server.on("error", () => {
-	console.log("Error on node.js ...!", error);
+server.on("error", (error) => {
+    logger.error("application server: error... %o", error);
 
-	if (error.syscall !== "listen") throw error;
+    if (error.syscall !== "listen") {
+        throw error;
+    }
 
-	switch (error.code) {
-		case "EACCES":
-			console.error("Requires elevated privileges.");
-			process.exit(1);
+    switch (error.code) {
+        case "EACCES":
+            logger.error("application server: Requires elevated privileges.");
+            process.exit(1);
+            break;
 
-		case "EADDRINUSE":
-			console.error(port + " is already in use.");
-			process.exit(1);
+        case "EADDRINUSE":
+            logger.error(`application server: ${port} is already in use.`);
+            process.exit(1);
+            break;
 
-		default:
-			throw error;
-	}
+        case "EADDRNOTAVAIL":
+            logger.error("application server: The specified IP address is not available on this machine.");
+            process.exit(1);
+            break;
+
+        case "ECONNREFUSED":
+            logger.error("application server: The server you're trying to connect to is not accepting connections.");
+            process.exit(1);
+            break;
+
+        default:
+            throw error;
+    }
 });
 
 server.on("listening", () => {
-	const { address, family, port } = server.address();
-	
-	logger.info("server is up and running...🚀");
-	logger.info("server address: " + chalk.magenta(address));
-	logger.info("server port: " + chalk.magenta(port));
-	logger.info("server family: " + chalk.magenta(family));
+    const { address, port } = server.address();
+
+    logger.info("application server: up and running...🚀");
+    logger.info(`application server: host: ${chalk.magenta(address)}:${chalk.magenta(port)}`);
+});
+
+server.on("upgrade", () => {
+    logger.info("application server: upgraded...");
+})
+
+server.on("disconnect", () => {
+    logger.error("application server: disconnecting...");
+});
+
+server.on("close", () => {
+    logger.error("application server: closed...");
+});
+
+server.on("error", () => {
+    logger.error("application server: error...");
+})
+
+server.on("clientError", () => {
+    logger.error("application server: client error...");
+})
+
+process.on("uncaughtException", () => {
+    logger.error("application server: uncaught exception...");
+});
+
+// process.on("unhandledRejection", (reason, promise) => {
+//     logger.error("application server: unhandled rejection... " + reason + promise);
+//     logger.error("application server: reason : %s", reason);
+//     logger.error("application server: promise : %o", promise);
+// });
+
+process.on("SIGINT", () => {
+    logger.error("application server: connection terminated...🟥");
+    server.close();
 });

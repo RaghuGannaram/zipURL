@@ -2,32 +2,41 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./assets/icon.png" type="image/png">
-  <link rel="stylesheet" href="./index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <title>zipURL</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>zipURL</title>
 </head>
 
-<body style="background: url(./assets/background-min.jpg) no-repeat top / cover fixed;">
-  <h2 class="heading">zipURL : A quick way to generate url shortcuts</h2>
-  <div class="card">
-    <form class="form" onsubmit="createShortURL(event); this.reset();">
-      <label for="url">Provide your URL</label><br>
-      <input type="text" id="url" name="url" value="" placeholder="Enter your url here...!" oninput="inputHandler(event)"><br>
-      <button type="submit">Generate short URL</button>
-    </form>
-    <div class="warning-placeholder">
-      <p class="warning">Please enter the url..!</p>
+<body style="background-color: black; height: 80vh;">
+    <div>
+        <h2 class="heading">zipURL |</h2>
+        <span class="sub-heading">A quick way to generate url shortcuts</span>
     </div>
-  </div>
-  <div class="result">
-    <!-- <a href=${shortURL} target="_blank">https://expressjs.com/en/4x/</a>
-    <i onclick="copyToClipBoard()" class="fa fa-clone clone-icon" aria-hidden="true"></i> -->
-  </div>
-  <script src="./index.js"></script>
+    <div class="container">
+        <div>
+            <div class="card">
+                <form class="form" onsubmit="createShortURL(event); this.reset();">
+                    <label for="url">Provide your URL</label><br>
+                    <input type="text" id="url" name="url" value="" placeholder="Enter your url here...!"
+                        oninput="inputHandler(event)"><br>
+                    <button type="submit">Generate short URL</button>
+                </form>
+                <div class="warning-placeholder">
+                    <p class="warning">Please enter the url..!</p>
+                </div>
+            </div>
+            <div class="result">
+                <!-- <a href=${shortURL} target="_blank">https://expressjs.com/en/4x/</a>
+                <i onclick="copyToClipBoard()" class="fa fa-clone clone-icon" aria-hidden="true"></i> -->
+            </div>
+        </div>
+        <img src="./assets/url-shortener.svg" />
+    </div>
+    <script src="./index.js"></script>
 </body>
 
 </html>
