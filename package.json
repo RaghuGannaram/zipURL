@@ -1,30 +1,50 @@
 {
-	"name": "zipurl",
-	"version": "1.0.0",
-	"description": "A URL shortening service",
-	"scripts": {
-		"start": "cross-env NODE_ENV=production LOG_LEVEL=http node ./bin/www",
-		"dev": "cross-env NODE_ENV=development LOG_LEVEL=debug nodemon ./bin/www --ignore database/",
-		"prod": "cross-env NODE_ENV=production LOG_LEVEL=http node ./bin/www"
-	},
-	"keywords": [
-		"url",
-		"shortening"
-	],
-	"author": "Raghu Gannaram",
-	"license": "MIT",
-	"dependencies": {
-		"chalk": "^4.1.2",
-		"cors": "^2.8.5",
-		"dotenv": "^16.0.3",
-		"express": "^4.18.2",
-		"http-errors": "^2.0.0",
-		"morgan": "^1.10.0",
-		"mysql": "^2.18.1",
-		"winston": "^3.10.0"
-	},
-	"devDependencies": {
-		"cross-env": "^7.0.3",
-		"nodemon": "^2.0.22"
-	}
+    "name": "zipurl",
+    "version": "1.0.0",
+    "description": "zipURL | A URL shortening service",
+    "keywords": [
+        "url",
+        "shortening"
+    ],
+    "homepage": "https://github.com/RaghuGannaram/zipURL",
+    "bugs": {
+        "url": "https://github.com/RaghuGannaram/zipURL/issues",
+        "email": "mail@raghugannaram.com"
+    },
+    "license": "MIT",
+    "private": true,
+    "author": {
+        "name": "Raghu Gannaram",
+        "email": "mail@raghugannaram.com",
+        "url": "https://raghugannaram.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RaghuGannaram/zipURL"
+    },
+    "main": "bin/www",
+    "type": "commonjs",
+    "scripts": {
+        "start": "cross-env NODE_ENV=production LOG_LEVEL=http node ./bin/www",
+        "dev": "cross-env NODE_ENV=development LOG_LEVEL=debug nodemon ./bin/www --ignore database/",
+        "prod": "cross-env NODE_ENV=production LOG_LEVEL=http node ./bin/www"
+    },
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "http-errors": "^2.0.0",
+        "morgan": "^1.10.0",
+        "mysql": "^2.18.1",
+        "winston": "^3.10.0"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.22"
+    },
+    "engines": {
+        "node": ">=20.10.0",
+        "npm": ">=10.2.3"
+    }
 }

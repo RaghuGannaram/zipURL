@@ -3,16 +3,19 @@ const { getCurrentEnv } = require("../utils/env-info");
 const logger = require("../configs/logger.config");
 
 const stream = {
-	write: (message) => logger.http(message.toString().trim()),
+    write: (message) => logger.http(message.toString().trim()),
 };
 
 const skip = () => {
-	return false;
+    return false;
 
-	const currentEnv = getCurrentEnv();
-	return currentEnv !== "development";
+    const currentEnv = getCurrentEnv();
+    return currentEnv !== "development";
 };
 
-const morganMiddleware = morgan(" :remote-addr :method :url :status :res[content-length] - :response-time ms", { stream, skip });
+const morganMiddleware = morgan(" :remote-addr :method :url :status :res[content-length] - :response-time ms", {
+    stream,
+    skip,
+});
 
 module.exports = morganMiddleware;

@@ -20,7 +20,11 @@ function hashGen(seed) {
 
         currentHash = currentIndex.map((index) => alphabet[index]).join("");
         nextHash = currentHash;
-        fs.writeFileSync(path.join(__dirname, "../../database/hash.json"), JSON.stringify({ seed: nextHash }, null, 2), "utf8");
+        fs.writeFileSync(
+            path.join(__dirname, "../../database/hash.json"),
+            JSON.stringify({ seed: nextHash }, null, 2),
+            "utf8"
+        );
 
         logger.info("generate-hash: hash: %s", nextHash);
 

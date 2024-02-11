@@ -15,13 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(dbMiddleware);
 
 app.get("/health-check", (req, res) => {
-	res.status(200).json({ message: "OK" });
+    res.status(200).json({ message: "OK" });
 });
 app.use("/app", express.static("./public"));
 app.use("/", hashRouter);
 
 app.use((req, res) => {
-	res.redirect("/app");
+    res.redirect("/app");
 });
 
 app.use(customErrorHandler);

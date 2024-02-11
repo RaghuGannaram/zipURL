@@ -21,7 +21,7 @@ function customErrorHandler(err, req, res, next) {
     if (currentEnv === "production") {
         res.status(err.status).json({
             status: err.status,
-            message: err.message
+            message: err.message,
         });
         return;
     }
@@ -32,7 +32,7 @@ function customErrorHandler(err, req, res, next) {
         type: err.type,
         description: err.description,
         ...err,
-        stack: err.stack
+        stack: err.stack,
     });
 }
 
