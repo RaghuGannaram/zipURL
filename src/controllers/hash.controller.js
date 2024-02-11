@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const hashModel = require("../model/hash.model");
+const hashModel = require("../services/hash.service");
 const catchAsyncError = require("../middlewares/catch-async-error.middleware");
 const generateHash = require("../utils/generate-hash");
 const validateHash = require("../utils/validate-hash");
